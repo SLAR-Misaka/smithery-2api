@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "useDefineForClassFields": true
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 100,
+    "semiColons": true,
+    "singleQuote": false
+  },
+  "tasks": {
+    "dev": "deno run --allow-env --allow-net --env-file=.env src/main.ts",
+    "start": "deno run --allow-env --allow-net src/main.ts"
+  }
+}
