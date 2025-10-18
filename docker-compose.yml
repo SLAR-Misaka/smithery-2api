@@ -1,28 +1,14 @@
 services:
-  nginx:
-    image: nginx:latest
-    container_name: smithery-2api-nginx
-    restart: always
-    ports:
-      - "${NGINX_PORT:-8088}:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - app
-    networks:
-      - smithery-net
-
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: smithery-2api-app
+    container_name: smithery-2api-deno
     restart: unless-stopped
     env_file:
       - .env
-    networks:
-      - smithery-net
-
-networks:
-  smithery-net:
-    driver: bridge
+    environment:
+      - NGINX_PORT=${NGINX_PORT:-8088}
+    ports:
+      - "${NGINX_PORT:-8088}:8088"
+    command: deno task start
